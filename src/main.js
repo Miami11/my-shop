@@ -30,10 +30,12 @@ router.beforeEach((to, from, next) => {
         console.log("api check valid");
         next();
       } else {
+        console.log("api check invalid");
         next({ path: "/login" });
       }
     });
   } else {
+    console.log("no need to check");
     next();
   }
 });
