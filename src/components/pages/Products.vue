@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
       <button
         class="btn btn-primary"
@@ -92,21 +93,20 @@
                   <div class="form-group">
                     <label for="customFile"
                       >或 上傳圖片
-                      <i class="fas fa-spinner fa-spin"></i>
+                      <i
+                        class="fas fa-spinner fa-spin"
+                        v-if="status.fileUploading"
+                      ></i>
                     </label>
                     <input
                       type="file"
                       id="customFile"
                       class="form-control"
                       ref="files"
+                      @change="uploadFile"
                     />
                   </div>
-                  <img
-                    img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
-                    class="img-fluid"
-                    :src="tempProduct.imageUrl"
-                    alt=""
-                  />
+                  <img class="img-fluid" :src="tempProduct.imageUrl" alt="" />
                 </div>
                 <div class="col-sm-8">
                   <div class="form-group">
@@ -283,20 +283,25 @@ export default {
     return {
       products: [],
       tempProduct: {},
-      isNew: false
+      isNew: false,
+      isLoading: false,
+      status: {
+        fileUploading: false
+      }
     };
   },
   methods: {
     getProducts() {
+      this.isLoading = true;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products`;
-      console.log(process.env.APIPATH, process.env.CUSTOMPATH);
-      console.log("====api" + api);
+
       // const vm = this;
       // arrow function
       this.$http.get(api).then(response => {
         console.log(response.data);
         this.products = response.data.products;
         console.log("QQQQQ", this.products);
+        this.isLoading = false;
       });
       // 一般function
       // this.$http.get(api).then(function(response) {
@@ -304,6 +309,28 @@ export default {
       //   this.products = response.data.products;
       //   console.log("this is wrong", this.products);
       // });
+    },
+    uploadFile() {
+      console.log(this);
+      let url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/upload`;
+      let formData = new FormData();
+      let data = this.$refs.files.files[0];
+      this.status.fileUploading = true;
+      formData.append("file-to-upload", data);
+      this.$http
+        .post(url, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(response => {
+          // this.tempProduct.imageUrl = response.data.imageUrl;
+          this.$set(this.tempProduct, "imageUrl", response.data.imageUrl);
+          this.status.fileUploading = false;
+        })
+        .catch(function() {
+          console.log("FAILURE!");
+        });
     },
     updateProduct() {
       let api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/product`;
