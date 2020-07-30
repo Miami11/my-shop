@@ -325,11 +325,13 @@ export default {
         })
         .then(response => {
           // this.tempProduct.imageUrl = response.data.imageUrl;
-          this.$set(this.tempProduct, "imageUrl", response.data.imageUrl);
+          if (response.data.success) {
+            this.$set(this.tempProduct, "imageUrl", response.data.imageUrl);
+          } else {
+            this.$bus.$emit("messsage:push", response.data.message, "danger");
+          }
+
           this.status.fileUploading = false;
-        })
-        .catch(function() {
-          console.log("FAILURE!");
         });
     },
     updateProduct() {
