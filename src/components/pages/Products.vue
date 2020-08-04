@@ -27,8 +27,8 @@
           <tr v-for="item in products" :key="item.id">
             <td>{{ item.category }}</td>
             <td>{{ item.title }}</td>
-            <td class="text-right">{{ item.price }}</td>
-            <td class="text-right">{{ item.origin_price }}</td>
+            <td class="text-right">{{ item.price | currency }}</td>
+            <td class="text-right">{{ item.origin_price | currency }}</td>
             <td>
               <span v-if="item.is_enable" class="text-success">啟用</span>
               <span v-else>未啟用</span>
@@ -52,6 +52,36 @@
           </tr>
         </tbody>
       </table>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item" :class="{ disabled: !pagination.has_pre }">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li
+            class="page-item"
+            v-for="page in pagination.total_pages"
+            :key="page"
+            :class="{ active: pagination.current_page === page }"
+          >
+            <a class="page-link" href="#" @click.prevent="getProducts(page)">{{
+              page
+            }}</a>
+          </li>
+
+          <li class="page-item">
+            <a
+              class="page-link"
+              :class="{ disabled: !pagination.has_next }"
+              href="#"
+              aria-label="Next"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
       <!-- Modal -->
       <div
         class="modal fade"
@@ -287,20 +317,22 @@ export default {
       isLoading: false,
       status: {
         fileUploading: false
-      }
+      },
+      pagination: []
     };
   },
   methods: {
-    getProducts() {
+    getProducts(page = 1) {
       this.isLoading = true;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products`;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`;
 
       // const vm = this;
       // arrow function
       this.$http.get(api).then(response => {
         console.log(response.data);
         this.products = response.data.products;
-        console.log("QQQQQ", this.products);
+        this.pagination = response.data.pagination;
+        console.log("QQQQQ", response.data);
         this.isLoading = false;
       });
       // 一般function
