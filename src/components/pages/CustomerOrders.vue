@@ -41,7 +41,11 @@
               ></i>
               查看更多
             </button>
-            <button type="button" class="btn btn-outline-danger btn-sm ml-auto">
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm ml-auto"
+              @click.prevent="addToCart(product.id, num)"
+            >
               <i
                 v-if="status.loadingItem === item.id"
                 class="fas fa-spinner fa-spin"
@@ -107,7 +111,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="addtoCart(product.id, product.num)"
+              @click="addToCart(product.id, product.num)"
             >
               <i
                 class="fas fa-spinner fa-spin"
@@ -122,15 +126,23 @@
 
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li class="page-item">
+        <li class="page-item" :class="{ disabled: !pagination.has_pre }">
           <a class="page-link" href="#" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
+        <li
+          class="page-item"
+          v-for="num in pagination.total_pages"
+          :class="{ active: num === pagination.current_page }"
+          :key="num"
+        >
+          <a class="page-link" href="#" @click.prevent="getProducts(num)">{{
+            num
+          }}</a>
+        </li>
+
+        <li class="page-item" :class="{ disabled: !pagination.has_next }">
           <a class="page-link" href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
@@ -150,7 +162,8 @@ export default {
       },
       products: [],
       product: {},
-      pagination: 1
+      pagination: [],
+      carts: []
     };
   },
   methods: {
@@ -174,10 +187,41 @@ export default {
         console.log("response single==", response.data);
         this.status.loadingItem = "";
       });
+    },
+    addToCart(id, qty = 1) {
+      this.status.loadingItem = id;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+
+      this.$http
+        .post(api, {
+          data: {
+            product_id: id,
+            qty
+          }
+        })
+        .then(response => {
+          console.log("response cart==", response.data);
+          this.status.loadingItem = "";
+          this.getCart();
+        });
+      $("#productModal").modal("hide");
+    },
+    getCart() {
+      this.isLoading = true;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+
+      this.$http.get(api).then(response => {
+        this.carts = response.data.carts;
+        console.log("response cart==", response.data);
+        this.status.loadingItem = "";
+        this.isLoading = false;
+      });
     }
   },
+
   created() {
     this.getProducts();
+    this.getCart();
   }
 };
 </script>
