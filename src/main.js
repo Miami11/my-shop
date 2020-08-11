@@ -9,6 +9,8 @@ import Loading from "vue-loading-overlay";
 // Import stylesheet
 import "vue-loading-overlay/dist/vue-loading.css";
 import currencyFilter from "./filters/currency";
+import VeeValidate from "vee-validate";
+import VueI18n from "vue-i18n";
 
 import App from "./App";
 import router from "./router";
@@ -18,10 +20,20 @@ Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.component("Loading", Loading);
 Vue.filter("currency", currencyFilter);
+Vue.use(VueI18n);
+
+const i18n = new VueI18n({
+  locale: "zhTW"
+});
+Vue.use(VeeValidate, {
+  i18n,
+  dictionary: {}
+});
 
 axios.defaults.withCredentials = true;
 /* eslint-disable no-new */
 new Vue({
+  i18n,
   el: "#app",
   router,
   components: { App },
