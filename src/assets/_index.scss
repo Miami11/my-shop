@@ -63,6 +63,81 @@ body {
   letter-spacing: -0.05rem;
 }
 
+.banner-bgcolor {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.pic {
+  overflow: hidden;
+  position: relative;
+  height: 230px;
+}
+.pic img {
+  width: 100%;
+}
+
+.image-position {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.discount {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  color: black;
+  font-weight: 500;
+}
+.product-title {
+}
+.add-cart {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+  padding: 10px;
+  background-color: rgba(100%, 100%, 100%, 0.3);
+  border-radius: 50%;
+}
+.add-cart:hover {
+  background-color: rgba(241, 202, 233, 0.8);
+}
+.text-product {
+  line-height: 20px;
+  margin: 30px 0;
+  background-color: rgba(100%, 100%, 100%, 0.6);
+}
+
+.origin_price {
+  color: #777777;
+  font-size: 13px;
+  font-weight: inherit;
+  vertical-align: baseline;
+  text-decoration: line-through;
+}
+.text-product a {
+  font-size: 13px;
+  color: #222222;
+  text-align: left;
+  text-transform: capitalize;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.text-product a:hover {
+  color: black;
+}
+.parallax {
+  /* The image used */
+  background-image: url("./assets/images/bg.jpg");
+
+  /* Set a specific height */
+  // height: 500px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: right;
+  background-repeat: no-repeat;
+  // background-size: cover;
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
@@ -83,4 +158,11 @@ body {
   .featurette-heading {
     margin-top: 7rem;
   }
+}
+.pd {
+  padding: 12px;
+}
+.unit {
+  font-size: 8px;
+  color: #777777;
 }
