@@ -69,7 +69,22 @@ body {
 .pic {
   overflow: hidden;
   position: relative;
-  height: 230px;
+  height: 200px;
+}
+.carousel-item img {
+  top: -302px;
+  border-radius: 50%;
+  left: -18px;
+  // width: 120%;
+  height: 159%;
+}
+.pic-show {
+  overflow: hidden;
+  position: relative;
+  height: 350px;
+}
+.pic-show img {
+  width: 100%;
 }
 .pic img {
   width: 100%;
@@ -89,23 +104,31 @@ body {
 }
 .product-title {
 }
+.product-show {
+  margin: 100px 0;
+}
 .add-cart {
   position: absolute;
-  bottom: 20px;
+  bottom: 25px;
   right: 15px;
   padding: 10px;
   background-color: rgba(100%, 100%, 100%, 0.3);
   border-radius: 50%;
 }
 .add-cart:hover {
-  background-color: rgba(241, 202, 233, 0.8);
+  background-color: rgba(114, 111, 113, 0.5);
 }
 .text-product {
   line-height: 20px;
-  margin: 30px 0;
+  margin: 10px 0;
   background-color: rgba(100%, 100%, 100%, 0.6);
 }
-
+.pd-bottom {
+  padding-bottom: 15px;
+}
+.pd-bottom-ms {
+  padding-bottom: 60px;
+}
 .origin_price {
   color: #777777;
   font-size: 13px;
@@ -121,21 +144,50 @@ body {
   white-space: nowrap;
   text-decoration: none;
 }
+a {
+  font-size: 12px;
+  color: #222222;
+  text-align: left;
+  text-transform: capitalize;
+  white-space: nowrap;
+  text-decoration: none;
+}
 .text-product a:hover {
   color: black;
 }
 .parallax {
   /* The image used */
-  background-image: url("./assets/images/bg.jpg");
+  background-image: url("./assets/images/bg.png");
 
   /* Set a specific height */
   // height: 500px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
-  background-position: right;
+  background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
   // background-size: cover;
+}
+.form-group label {
+  color: black;
+}
+.message {
+  /* The image used */
+  background-image: url("./assets/images/message-bg.jpg");
+
+  /* Set a specific height */
+  // height: 500px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.group-product {
+  box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.8);
+  padding: 2px;
 }
 
 /* RESPONSIVE CSS
