@@ -3,8 +3,7 @@
 /* Padding below the footer and lighter body text */
 
 body {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  // padding-top: 3rem;
   color: #5a5a5a;
 }
 
@@ -20,7 +19,10 @@ body {
   bottom: 3rem;
   z-index: 10;
 }
-
+.show-logo img {
+  width: 30%;
+  margin: 15px;
+}
 /* Declare heights because of positioning of img element */
 .carousel-item {
   height: 32rem;
@@ -32,7 +34,12 @@ body {
   min-width: 100%;
   height: 32rem;
 }
-
+footer p {
+  color: #a1a2a5;
+}
+.footer a {
+  color: #ffffff;
+}
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
@@ -71,6 +78,9 @@ body {
   position: relative;
   height: 200px;
 }
+.border-line {
+  border: 1px solid #5a5a5a;
+}
 .carousel-item img {
   top: -302px;
   border-radius: 50%;
@@ -81,7 +91,7 @@ body {
 .pic-show {
   overflow: hidden;
   position: relative;
-  height: 350px;
+  height: 300px;
 }
 .pic-show img {
   width: 100%;
@@ -106,6 +116,9 @@ body {
 }
 .product-show {
   margin: 100px 0;
+  background-image: url("./assets/images/show-bg.png");
+  background-size: cover;
+  background-position: center center;
 }
 .add-cart {
   position: absolute;
@@ -115,9 +128,9 @@ body {
   background-color: rgba(100%, 100%, 100%, 0.3);
   border-radius: 50%;
 }
-.add-cart:hover {
-  background-color: rgba(114, 111, 113, 0.5);
-}
+// .add-cart:hover {
+//   background-color: rgba(114, 111, 113, 0.5);
+// }
 .text-product {
   line-height: 20px;
   margin: 10px 0;
@@ -136,8 +149,17 @@ body {
   vertical-align: baseline;
   text-decoration: line-through;
 }
+.price {
+  color: red;
+}
+.side-pic img {
+  width: 100%;
+}
+.fa-shopping-cart {
+  color: white;
+}
 .text-product a {
-  font-size: 13px;
+  font-size: 1rem;
   color: #222222;
   text-align: left;
   text-transform: capitalize;
@@ -185,6 +207,13 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.footer {
+  background-color: #343a40;
+}
+.footer footer {
+  display: initial;
+  margin: 20px;
+}
 .group-product {
   box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.8);
   padding: 2px;
@@ -217,4 +246,11 @@ a {
 .unit {
   font-size: 8px;
   color: #777777;
+}
+.navbar a {
+  background-color: #343a40;
+  box-shadow: none;
+}
+.nav-item a {
+  font-size: 16px;
 }

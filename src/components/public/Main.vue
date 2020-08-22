@@ -60,6 +60,8 @@
 
             <hr />
           </div>
+        </div>
+        <div class="row">
           <div
             class="col-md-3 col-sm-4 col-xs-12 pd-bottom"
             v-for="item in products"
@@ -89,8 +91,12 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="row justify-content-end">
           <p>
-            <a class="group-product" href>看更多其他...</a>
+            <a href>
+              <strong>看更多其他...</strong>
+            </a>
           </p>
         </div>
       </div>
@@ -143,7 +149,7 @@
         </div>
       </div>
     </div>
-    <div class="message">
+    <div class="message" id="mark-1">
       <div class="container marketing pd-bottom-ms">
         <hr class="featurette-divider" />
 
@@ -174,19 +180,6 @@
         </div>
       </div>
     </div>
-    <hr class="featurette-divider" />
-    <!-- FOOTER -->
-    <footer class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>
-        &copy; 2017-2020 Company, Inc. &middot;
-        <a href="#">Privacy</a> &middot;
-        <a href="#">Terms</a>
-      </p>
-    </footer>
-    <!-- </main> -->
   </div>
 </template>
 
