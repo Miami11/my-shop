@@ -19,9 +19,9 @@
                   說明：{{ product.description }}
                 </p>
                 <!-- <div class="col-md-7"> -->
-                <div class="origin_price" v-if="!product.price">{{ product.origin_price }} 元</div>
-                <del class="origin_price" v-if="product.price">原價 {{ product.origin_price }}</del>
-                <div class="price" v-if="product.price">現在只要 {{ product.price }} 元</div>
+
+                <del class="origin_price" v-if="product.origin_price">原價 {{ product.origin_price }}</del>
+                <div class="price" v-if="product.price">售價 {{ product.price }} 元</div>
                 <!-- </div> -->
                 <div class="form-group">
                   <select name class="form-control" v-model="product.num">
@@ -55,6 +55,25 @@
         <hr class="featurette-divider" />
       </div>
     </div>
+    <div class="show-message">
+      <div class="container marketing">
+        <div class="row featurette">
+          <div class="col-md-6 col-xs-4">
+            <div class="show-logo">
+              <img src="@/assets/images/logo.png" alt />
+            </div>
+          </div>
+          <div class="col-md-6 col-xs-8">
+            <h3>注意事項</h3>
+            <p>
+              配送方式請一律選擇「宅配到府」，因商品為活體植栽為維了護品質，故無法提供「超商取貨」、「超商取貨付款」服務。
+              2.植栽因生長過程受日照、季節等因素影響，預計出貨日為3-5工作天，寄出時會避開星期五，寄出後兩天內務必有人於收件地址收貨，若兩天內投遞不成功或久悶於紙箱中將有缺壞的可能，若因投遞不成功或較遲開箱而導致植栽損壞恕不負責，煩請配合留意，謝謝！
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="featurette-divider" />
   </div>
 </template>
 
@@ -126,27 +145,6 @@ export default {
         console.log("response cart==", this.carts);
         this.status.loadingItem = "";
         this.isLoading = false;
-      });
-    },
-
-    createOrder() {
-      const vm = this;
-      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
-      const order = vm.form;
-      // vm.isLoading = true;
-      this.$validator.validate().then((result) => {
-        if (result) {
-          this.$http.post(url, { data: order }).then((response) => {
-            console.log("訂單已建立", response.data.orderId);
-            // vm.getCart();
-            if (response.data.success) {
-              vm.$router.push(`/customer_checkout/${response.data.orderId}`);
-            }
-            vm.isLoading = false;
-          });
-        } else {
-          console.log("欄位不完整");
-        }
       });
     },
   },
