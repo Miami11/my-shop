@@ -62,34 +62,13 @@
           </div>
         </div>
         <div class="row">
+          <!-- item card -->
           <div
             class="col-md-3 col-sm-4 col-xs-12 pd-bottom"
             v-for="item in products"
             :key="item.id"
           >
-            <div class="group-product">
-              <div class="pic">
-                <img class="image-position product-size" :src="item.imageUrl" alt />
-              </div>
-
-              <div class="text-product">
-                <p>
-                  <router-link class :to="'show/'+`${item.id}`">{{item.title}}</router-link>
-                  <br />
-                  <span class="unit">單位:{{ item.unit }}</span>
-                </p>
-                <span
-                  class="origin_price line-through"
-                  v-if="item.origin_price"
-                >建議售價 {{ item.origin_price }} 元</span>
-                <br />
-                <span class="price" v-if="item.price">特價 {{ item.price }}</span>
-                <a class="add-cart" @click.prevent="addToCart(item.id)" type="button">
-                  <i class="fas fa-cart-plus"></i>
-                  <i v-if="status.loadingItem === item.id" class="fas fa-spinner fa-spin"></i>
-                </a>
-              </div>
-            </div>
+            <ItemCard :product="item" :status="false"></ItemCard>
           </div>
         </div>
         <div class="row justify-content-end">
@@ -203,7 +182,10 @@
 
 <script>
 import $ from "jquery";
+import ItemCard from "./ItemCard.vue";
+
 export default {
+  components: { ItemCard },
   data() {
     return {
       isLoading: false,

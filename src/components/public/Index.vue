@@ -5,11 +5,13 @@
     <main role="main">
       <router-view></router-view>
     </main>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Header from "./Header";
 import Alert from "../AlertMessage";
-export default { components: { Header, Alert } };
+import Footer from "./Footer";
+export default { components: { Header, Alert, Footer } };
 </script>
