@@ -136,7 +136,9 @@
         </form>
       </div>
     </div>
-    <p v-else>購物車尚未有商品</p>
+    <div v-else class="cart-bg parallax">
+      <p class="featurette-divider">購物車尚未有商品</p>
+    </div>
   </div>
 </template>
 

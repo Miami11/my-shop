@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <main role="main"> -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -15,7 +14,11 @@
           <div class="container">
             <div class="carousel-caption text-left">
               <h1>Example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p>
+                Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                Donec id elit non mi porta gravida at eget metus. Nullam id
+                dolor id nibh ultricies vehicula ut id elit.
+              </p>
             </div>
           </div>
         </div>
@@ -25,7 +28,11 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p>
+                Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                Donec id elit non mi porta gravida at eget metus. Nullam id
+                dolor id nibh ultricies vehicula ut id elit.
+              </p>
             </div>
           </div>
         </div>
@@ -68,14 +75,14 @@
             v-for="item in products"
             :key="item.id"
           >
-            <ItemCard :product="item" :status="false"></ItemCard>
+            <ItemCard :product="item" :status="false" v-on:add="addToCart"></ItemCard>
           </div>
         </div>
         <div class="row justify-content-end">
           <p>
-            <a href>
+            <router-link to="/fermi/products">
               <strong>看更多其他...</strong>
-            </a>
+            </router-link>
           </p>
         </div>
       </div>
@@ -162,8 +169,7 @@
   </div>
 </template>
 
-
-<style  scoped>
+<style scoped>
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -193,7 +199,6 @@ export default {
         loadingItem: false,
       },
       products: [],
-
       carts: {},
     };
   },
@@ -209,43 +214,14 @@ export default {
         this.isLoading = false;
       });
     },
-
-    addToCart(id, qty = 1) {
-      this.status.loadingItem = id;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      console.log("----product----" + this.product);
-      this.$http
-        .post(api, {
-          data: {
-            product_id: id,
-            qty,
-          },
-        })
-        .then((response) => {
-          this.status.loadingItem = "";
-          this.getCart();
-        });
-      $("#productModal").modal("hide");
-    },
-    getCart() {
-      this.isLoading = true;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-
-      this.$http.get(api).then((response) => {
-        this.carts = response.data.data;
-        this.status.loadingItem = "";
-        this.isLoading = false;
-      });
+    addToCart: function (id, qty = 1) {
+      var data = { data: { product_id: id, qty } };
+      this.$store.dispatch("ADD_CARTS", data);
     },
   },
 
   created() {
     this.getProducts();
-    this.getCart();
   },
 };
 </script>
-
-
-
-
