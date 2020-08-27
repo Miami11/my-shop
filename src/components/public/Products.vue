@@ -20,25 +20,26 @@
         <div class="row">
           <div
             class="col-md-3 col-sm-4 col-xs-12 pd-bottom"
-            v-for="item in products"
+            v-for="item in filterData('裝飾')"
             :key="item.id"
-            v-if="item.category == '裝飾'"
           >
-            <ItemCard :product="item" :status="false"></ItemCard>
+            <ItemCard :product="item" :status="false" v-on:add="addToCart"></ItemCard>
           </div>
         </div>
         <div class="row">
           <h5>禮品</h5>
-          <p>各式各樣高品質與價格合理花束、花藍、盆景等，提供配送安排，立即訂購！ 節日大小事「花落」一品。花語傳情-傳遞最真摯的心意。再遠的距離都讓我幫您傳情。</p>
+          <p>
+            各式各樣高品質與價格合理花束、花藍、盆景等，提供配送安排，立即訂購！
+            節日大小事「花落」一品。花語傳情-傳遞最真摯的心意。再遠的距離都讓我幫您傳情。
+          </p>
         </div>
         <div class="row">
           <div
             class="col-md-3 col-sm-4 col-xs-12 pd-bottom"
-            v-for="item in products"
+            v-for="item in filterData('禮品')"
             :key="item.id"
-            v-if="item.category == '園藝'"
           >
-            <ItemCard :product="item" :status="false"></ItemCard>
+            <ItemCard :product="item" :status="false" v-on:add="addToCart"></ItemCard>
           </div>
         </div>
         <div class="row">
@@ -48,11 +49,10 @@
         <div class="row">
           <div
             class="col-md-3 col-sm-4 col-xs-12 pd-bottom"
-            v-for="item in products"
+            v-for="item in filterData('造景')"
             :key="item.id"
-            v-if="item.category == '造景'"
           >
-            <ItemCard :product="item" :status="false"></ItemCard>
+            <ItemCard :product="item" :status="false" v-on:add="addToCart"></ItemCard>
           </div>
         </div>
       </div>
@@ -60,8 +60,7 @@
   </div>
 </template>
 
-
-<style  scoped>
+<style scoped>
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -90,9 +89,12 @@ export default {
         loadingItem: false,
       },
       products: [],
-
       carts: {},
     };
+  },
+
+  created() {
+    this.getProducts();
   },
   methods: {
     getProducts() {
@@ -106,43 +108,13 @@ export default {
         this.isLoading = false;
       });
     },
-
-    addToCart(id, qty = 1) {
-      this.status.loadingItem = id;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      console.log("----product----" + this.product);
-      this.$http
-        .post(api, {
-          data: {
-            product_id: id,
-            qty,
-          },
-        })
-        .then((response) => {
-          this.status.loadingItem = "";
-          this.getCart();
-        });
-      $("#productModal").modal("hide");
+    addToCart: function (id, qty = 1) {
+      var data = { data: { product_id: id, qty } };
+      this.$store.dispatch("ADD_CARTS", data);
     },
-    getCart() {
-      this.isLoading = true;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-
-      this.$http.get(api).then((response) => {
-        this.carts = response.data.data;
-        this.status.loadingItem = "";
-        this.isLoading = false;
-      });
+    filterData(category) {
+      return this.products.filter((item) => category == item.category);
     },
-  },
-
-  created() {
-    this.getProducts();
-    this.getCart();
   },
 };
 </script>
-
-
-
-

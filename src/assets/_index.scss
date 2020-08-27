@@ -137,10 +137,22 @@ footer p {
   font-size: 14px;
   color: black;
 }
-// .add-cart:hover {
-//   background-color: rgba(114, 111, 113, 0.5);
-// }
-.text-product {
+.cart-number {
+  position: relative;
+}
+.number {
+  text-align: center;
+  border-radius: 50%;
+  background-color: #de4343;
+  color: white;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: -8px;
+  left: 28px;
+  font-size: 11px;
+}
+.cart .text-product {
   line-height: 20px;
   margin: 10px 0;
   background-color: rgba(100%, 100%, 100%, 0.6);
@@ -166,6 +178,7 @@ footer p {
 }
 .fa-shopping-cart {
   color: white;
+  font-size: 18px;
 }
 .text-product a {
   font-size: 1rem;
