@@ -3,8 +3,7 @@
 /* Padding below the footer and lighter body text */
 
 body {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  // padding-top: 3rem;
   color: #5a5a5a;
 }
 
@@ -20,7 +19,10 @@ body {
   bottom: 3rem;
   z-index: 10;
 }
-
+.show-logo img {
+  width: 30%;
+  margin: 15px;
+}
 /* Declare heights because of positioning of img element */
 .carousel-item {
   height: 32rem;
@@ -32,7 +34,15 @@ body {
   min-width: 100%;
   height: 32rem;
 }
-
+.carousel-item img {
+  height: 100%;
+}
+footer p {
+  color: #a1a2a5;
+}
+.footer a {
+  color: #ffffff;
+}
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
@@ -71,17 +81,14 @@ body {
   position: relative;
   height: 200px;
 }
-.carousel-item img {
-  top: -302px;
-  border-radius: 50%;
-  left: -18px;
-  // width: 120%;
-  height: 159%;
+.border-line {
+  border: 1px solid #5a5a5a;
 }
+
 .pic-show {
   overflow: hidden;
   position: relative;
-  height: 350px;
+  height: 300px;
 }
 .pic-show img {
   width: 100%;
@@ -106,6 +113,9 @@ body {
 }
 .product-show {
   margin: 100px 0;
+  background-image: url("./assets/images/show-bg.png");
+  background-size: cover;
+  background-position: center center;
 }
 .add-cart {
   position: absolute;
@@ -115,10 +125,31 @@ body {
   background-color: rgba(100%, 100%, 100%, 0.3);
   border-radius: 50%;
 }
-.add-cart:hover {
-  background-color: rgba(114, 111, 113, 0.5);
+.product-bg h5 {
+  padding: 5px 15px;
 }
-.text-product {
+.product-bg p {
+  padding: 0px 15px;
+  line-height: 25px;
+  font-size: 14px;
+  color: black;
+}
+.cart-number {
+  position: relative;
+}
+.number {
+  text-align: center;
+  border-radius: 50%;
+  background-color: #de4343;
+  color: white;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: -8px;
+  left: 28px;
+  font-size: 11px;
+}
+.cart .text-product {
   line-height: 20px;
   margin: 10px 0;
   background-color: rgba(100%, 100%, 100%, 0.6);
@@ -136,8 +167,18 @@ body {
   vertical-align: baseline;
   text-decoration: line-through;
 }
+.price {
+  color: red;
+}
+.side-pic img {
+  width: 100%;
+}
+.fa-shopping-cart {
+  color: white;
+  font-size: 18px;
+}
 .text-product a {
-  font-size: 13px;
+  font-size: 1rem;
   color: #222222;
   text-align: left;
   text-transform: capitalize;
@@ -158,16 +199,21 @@ a {
 .parallax {
   /* The image used */
   background-image: url("./assets/images/bg.png");
-
-  /* Set a specific height */
-  // height: 500px;
-
-  /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  // background-size: cover;
+}
+.cart-bg {
+  background-color: floralwhite;
+  padding: 10px 30px;
+  margin-top: 80px;
+}
+.cart-title {
+  color: #212529;
+  padding: 50px 10px 10px 10px;
+  font-size: 22px;
+  font-weight: 400;
 }
 .form-group label {
   color: black;
@@ -184,6 +230,13 @@ a {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.footer {
+  background-color: #343a40;
+}
+.footer footer {
+  display: initial;
+  margin: 20px;
 }
 .group-product {
   box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.8);
@@ -217,4 +270,11 @@ a {
 .unit {
   font-size: 8px;
   color: #777777;
+}
+.navbar a {
+  background-color: #343a40;
+  box-shadow: none;
+}
+.nav-item a {
+  font-size: 16px;
 }

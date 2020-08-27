@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <main role="main"> -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -15,7 +14,11 @@
           <div class="container">
             <div class="carousel-caption text-left">
               <h1>Example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p>
+                Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                Donec id elit non mi porta gravida at eget metus. Nullam id
+                dolor id nibh ultricies vehicula ut id elit.
+              </p>
             </div>
           </div>
         </div>
@@ -25,7 +28,11 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p>
+                Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                Donec id elit non mi porta gravida at eget metus. Nullam id
+                dolor id nibh ultricies vehicula ut id elit.
+              </p>
             </div>
           </div>
         </div>
@@ -60,37 +67,22 @@
 
             <hr />
           </div>
+        </div>
+        <div class="row">
+          <!-- item card -->
           <div
             class="col-md-3 col-sm-4 col-xs-12 pd-bottom"
             v-for="item in products"
             :key="item.id"
           >
-            <div class="group-product">
-              <div class="pic">
-                <img class="image-position product-size" :src="item.imageUrl" alt />
-              </div>
-
-              <div class="text-product">
-                <p>
-                  <router-link class :to="'show/'+`${item.id}`">{{item.title}}</router-link>
-                  <br />
-                  <span class="unit">單位:{{ item.unit }}</span>
-                </p>
-                <span
-                  class="origin_price line-through"
-                  v-if="item.origin_price"
-                >建議售價 {{ item.origin_price }} 元</span>
-                <br />
-                <span class="price" v-if="item.price">特價 {{ item.price }}</span>
-                <a class="add-cart" @click.prevent="addToCart(item.id)" type="button">
-                  <i class="fas fa-cart-plus"></i>
-                  <i v-if="status.loadingItem === item.id" class="fas fa-spinner fa-spin"></i>
-                </a>
-              </div>
-            </div>
+            <ItemCard :product="item" :status="false" v-on:add="addToCart"></ItemCard>
           </div>
+        </div>
+        <div class="row justify-content-end">
           <p>
-            <a class="group-product" href>看更多其他...</a>
+            <router-link to="/fermi/products">
+              <strong>看更多其他...</strong>
+            </router-link>
           </p>
         </div>
       </div>
@@ -143,7 +135,7 @@
         </div>
       </div>
     </div>
-    <div class="message">
+    <div class="message" id="mark-1">
       <div class="container marketing pd-bottom-ms">
         <hr class="featurette-divider" />
 
@@ -174,24 +166,10 @@
         </div>
       </div>
     </div>
-    <hr class="featurette-divider" />
-    <!-- FOOTER -->
-    <footer class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>
-        &copy; 2017-2020 Company, Inc. &middot;
-        <a href="#">Privacy</a> &middot;
-        <a href="#">Terms</a>
-      </p>
-    </footer>
-    <!-- </main> -->
   </div>
 </template>
 
-
-<style  scoped>
+<style scoped>
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -210,7 +188,10 @@
 
 <script>
 import $ from "jquery";
+import ItemCard from "./ItemCard.vue";
+
 export default {
+  components: { ItemCard },
   data() {
     return {
       isLoading: false,
@@ -218,7 +199,6 @@ export default {
         loadingItem: false,
       },
       products: [],
-
       carts: {},
     };
   },
@@ -234,43 +214,14 @@ export default {
         this.isLoading = false;
       });
     },
-
-    addToCart(id, qty = 1) {
-      this.status.loadingItem = id;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-      console.log("----product----" + this.product);
-      this.$http
-        .post(api, {
-          data: {
-            product_id: id,
-            qty,
-          },
-        })
-        .then((response) => {
-          this.status.loadingItem = "";
-          this.getCart();
-        });
-      $("#productModal").modal("hide");
-    },
-    getCart() {
-      this.isLoading = true;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-
-      this.$http.get(api).then((response) => {
-        this.carts = response.data.data;
-        this.status.loadingItem = "";
-        this.isLoading = false;
-      });
+    addToCart: function (id, qty = 1) {
+      var data = { data: { product_id: id, qty } };
+      this.$store.dispatch("ADD_CARTS", data);
     },
   },
 
   created() {
     this.getProducts();
-    this.getCart();
   },
 };
 </script>
-
-
-
-

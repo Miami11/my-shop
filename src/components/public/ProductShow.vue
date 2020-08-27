@@ -58,17 +58,17 @@
     <div class="show-message">
       <div class="container marketing">
         <div class="row featurette">
-          <div class="col-md-6 col-xs-4">
-            <div class="show-logo">
+          <div class="col-md-12 col-xs-12">
+            <div class="show-logo d-flex justify-content-center">
               <img src="@/assets/images/logo.png" alt />
             </div>
-          </div>
-          <div class="col-md-6 col-xs-8">
-            <h3>注意事項</h3>
-            <p>
-              配送方式請一律選擇「宅配到府」，因商品為活體植栽為維了護品質，故無法提供「超商取貨」、「超商取貨付款」服務。
-              2.植栽因生長過程受日照、季節等因素影響，預計出貨日為3-5工作天，寄出時會避開星期五，寄出後兩天內務必有人於收件地址收貨，若兩天內投遞不成功或久悶於紙箱中將有缺壞的可能，若因投遞不成功或較遲開箱而導致植栽損壞恕不負責，煩請配合留意，謝謝！
-            </p>
+            <div class="text-group-show">
+              <h3>注意事項</h3>
+              <p>
+                配送方式請一律選擇「宅配到府」，因商品為活體植栽為維了護品質，故無法提供「超商取貨」、「超商取貨付款」服務。
+                2.植栽因生長過程受日照、季節等因素影響，預計出貨日為3-5工作天，寄出時會避開星期五，寄出後兩天內務必有人於收件地址收貨，若兩天內投遞不成功或久悶於紙箱中將有缺壞的可能，若因投遞不成功或較遲開箱而導致植栽損壞恕不負責，煩請配合留意，謝謝！
+              </p>
+            </div>
           </div>
         </div>
       </div>
