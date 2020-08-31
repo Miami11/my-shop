@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Fermi</a>
+      <router-link class="navbar-brand col-sm-3 col-md-2 mr-0" to="/">Fermi</router-link>
       <input
         class="form-control form-control-dark w-100"
         type="text"
@@ -24,13 +24,13 @@ export default {
       const api = `${process.env.APIPATH}/logout`;
       console.log(process.env.APIPATH, process.env.CUSTOMPATH);
       const vm = this;
-      this.$http.post(api).then(response => {
+      this.$http.post(api).then((response) => {
         console.log(response.data);
         if (response.data.success) {
           vm.$router.push("/login");
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>

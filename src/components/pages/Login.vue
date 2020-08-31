@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <form class="form-signin" @submit.prevent="signin">
-      <img class="mb-4" src="" alt="" width="72" height="72" />
+      <img class="mb-4" src alt width="72" height="72" />
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input
@@ -27,9 +27,7 @@
           <input type="checkbox" value="remember-me" /> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Sign in
-      </button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     </form>
   </div>
@@ -42,26 +40,26 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
-      }
+        password: "",
+      },
     };
   },
   methods: {
     signin() {
-      // const api = `${process.env.APIPATH}/admin/signin`;
-      const api = "https://vue-course-api.herokuapp.com/admin/signin";
+      const api = `${process.env.APIPATH}/admin/signin`; // const api = "/admin/signin";
       console.log(process.env.APIPATH, process.env.CUSTOMPATH);
-
       const vm = this;
-      console.log("========" + vm.user);
-      this.$http.post(api, vm.user).then(response => {
+      this.$http.post(api, vm.user).then((response) => {
         console.log(response.data);
         if (response.data.success) {
-          vm.$router.push("/");
+          vm.$router.push("/admin");
+          this.$bus.$emit("messsage:push", response.data.message, "success");
+        } else {
+          this.$bus.$emit("messsage:push", response.data.message, "danger");
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
